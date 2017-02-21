@@ -3,62 +3,59 @@
 
 // This code will run as soon as the page loads
 window.onload = function() {
-  $("#lap").on("click", stopwatch.recordLap);
-  $("#stop").on("click", stopwatch.stop);
-  $("#reset").on("click", stopwatch.reset);
-  $("#start").on("click", stopwatch.start);
+
+  // $("#lap").on("click", countdown.recordLap);
+   // $("#stop").on("click", countdown.stop);
+  // $("#reset").on("click", countdown.reset);
+  $("#display").html(countdown.start);
 };
 
-//  Variable that will hold our setInterval that runs the stopwatch
+//  Variable that will hold our setInterval that runs the countdown
 var intervalId;
 
-// Our stopwatch object
-var stopwatch = {
+// Our countdown object
+var countdown = {
 
-  time: 0,
+  time: 30,
   lap: 1,
 
-  reset: function() {
+  // reset: function() {
 
-    stopwatch.time = 0;
-    stopwatch.lap = 1;
+  //   stopwatch.time = 0;
+  //   stopwatch.lap = 1;
 
-    // DONE: Change the "display" div to "00:00."
-    $("#display").html("00:00");
+  //   // DONE: Change the "display" div to "00:00."
+  //   $("#display").html("00:00");
 
-    // DONE: Empty the "laps" div.
-    $("#laps").html("");
-  },
+  //   // DONE: Empty the "laps" div.
+  //   $("#laps").html("");
+  // },
   start: function() {
 
     // DONE: Use setInterval to start the count here.
-    intervalId = setInterval(stopwatch.count, 1000);
+    intervalId = setInterval(countdown.count, 1000);
+
   },
-  stop: function() {
+  // recordLap: function() {
 
-    // DONE: Use clearInterval to stop the count here.
-    clearInterval(intervalId);
-  },
-  recordLap: function() {
+  //   // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+  //   //       and save the result in a variable.
+  //   var converted = stopwatch.timeConverter(stopwatch.time);
 
-    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
-    //       and save the result in a variable.
-    var converted = stopwatch.timeConverter(stopwatch.time);
+  //   // DONE: Add the current lap and time to the "laps" div.
+  //   $("#laps").append("<p>Lap " + stopwatch.lap + " : " + converted + "</p>");
 
-    // DONE: Add the current lap and time to the "laps" div.
-    $("#laps").append("<p>Lap " + stopwatch.lap + " : " + converted + "</p>");
-
-    // DONE: Increment lap by 1. Remember, we can't use "this" here.
-    stopwatch.lap++;
-  },
+  //   // DONE: Increment lap by 1. Remember, we can't use "this" here.
+  //   stopwatch.lap++;
+  // },
   count: function() {
 
     // DONE: increment time by 1, remember we cant use "this" here.
-    stopwatch.time++;
+    countdown.time--;
 
     // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
     //       and save the result in a variable.
-    var converted = stopwatch.timeConverter(stopwatch.time);
+    var converted = countdown.timeConverter(countdown.time);
     console.log(converted);
 
     // DONE: Use the variable we just created to show the converted time in the "display" div.
@@ -76,13 +73,23 @@ var stopwatch = {
     if (minutes === 0) {
       minutes = "00";
     }
+
     else if (minutes < 10) {
       minutes = "0" + minutes;
     }
 
     return minutes + ":" + seconds;
   }
+  //   stop: function() {
+
+  //     if (seconds===0) {
+  //       clearInterval(intervalId);
+  //     }   
+  // },
+
 };
+
+
 
 
 // Solution if you choose not to put it in an object
