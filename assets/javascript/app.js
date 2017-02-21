@@ -1,75 +1,146 @@
-  var wins=1;
-  var losses=1;
+// STOPWATCH ACTIVITY (SOLUTION)
+// =============================
 
+// This code will run as soon as the page loads
+window.onload = function() {
+  $("#lap").on("click", stopwatch.recordLap);
+  $("#stop").on("click", stopwatch.stop);
+  $("#reset").on("click", stopwatch.reset);
+  $("#start").on("click", stopwatch.start);
+};
 
+//  Variable that will hold our setInterval that runs the stopwatch
+var intervalId;
 
-  var targetNumber = Math.floor(Math.random()*1;
+// Our stopwatch object
+var stopwatch = {
 
-  $("#number-to-guess").text(targetNumber);
+  time: 0,
+  lap: 1,
 
-  var counter = 0;
+  reset: function() {
 
-  // Now for the hard part. Creating multiple crystals each with their own unique number value.
+    stopwatch.time = 0;
+    stopwatch.lap = 1;
 
-  // We begin by expanding our array to include four options.
-  var numberOptions = [10, 5, 3, 7];
+    // DONE: Change the "display" div to "00:00."
+    $("#display").html("00:00");
 
-  // Next we create a for loop to create crystals for every numberOption.
-  for (var i = 0; i < numberOptions.length; i++) {
+    // DONE: Empty the "laps" div.
+    $("#laps").html("");
+  },
+  start: function() {
 
-    // For each iteration, we will create an imageCrystal
-    var imageCrystal = $("<img>");
+    // DONE: Use setInterval to start the count here.
+    intervalId = setInterval(stopwatch.count, 1000);
+  },
+  stop: function() {
 
-    // First each crystal will be given the class ".crystal-image".
-    // This will allow the CSS to take effect.
-    imageCrystal.addClass("crystal-image");
+    // DONE: Use clearInterval to stop the count here.
+    clearInterval(intervalId);
+  },
+  recordLap: function() {
 
-    // Each imageCrystal will be given a src link to the crystal image
-    imageCrystal.attr("src", "https://cdn.playbuzz.com/cdn/35910209-2844-45c0-b099-f4d82878d54f/00261fda-4062-4096-81fd-8cf96b9034e8.jpg");
+    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+    //       and save the result in a variable.
+    var converted = stopwatch.timeConverter(stopwatch.time);
 
-    // Each imageCrystal will be given a data attribute called data-crystalValue.
-    // This data attribute will be set equal to the array value.
-    imageCrystal.attr("data-crystalvalue", numberOptions[Math.floor(Math.random()*numberOptions.length)]);
+    // DONE: Add the current lap and time to the "laps" div.
+    $("#laps").append("<p>Lap " + stopwatch.lap + " : " + converted + "</p>");
 
-    // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
-    $("#crystals").append(imageCrystal);
+    // DONE: Increment lap by 1. Remember, we can't use "this" here.
+    stopwatch.lap++;
+  },
+  count: function() {
+
+    // DONE: increment time by 1, remember we cant use "this" here.
+    stopwatch.time++;
+
+    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+    //       and save the result in a variable.
+    var converted = stopwatch.timeConverter(stopwatch.time);
+    console.log(converted);
+
+    // DONE: Use the variable we just created to show the converted time in the "display" div.
+    $("#display").html(converted);
+  },
+  timeConverter: function(t) {
+
+    var minutes = Math.floor(t / 60);
+    var seconds = t - (minutes * 60);
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    if (minutes === 0) {
+      minutes = "00";
+    }
+    else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    return minutes + ":" + seconds;
   }
+};
 
-  // This time, our click event applies to every single crystal on the page. Not just one.
-  $(".crystal-image").on("click", function() {
 
-    // Determining the crystal's value requires us to extract the value from the data attribute.
-    // Using the $(this) keyword specifies that we should be extracting the crystal value of the clicked crystal.
-    // Using the .attr("data-crystalvalue") allows us to grab the value out of the "data-crystalvalue" attribute.
-    // Since attributes on HTML elements are strings, we must convert it to an integer before adding to the counter
-    
-    var crystalValue = ($(this).attr("data-crystalvalue"));
-    crystalValue = parseInt(crystalValue);
-    // We then add the crystalValue to the user's "counter" which is a global variable.
-    // Every click, from every crystal adds to the global counter.
-    counter += crystalValue;
+// Solution if you choose not to put it in an object
 
-    // All of the same game win-lose logic applies. So the rest remains unchanged.
-    alert("New score: " + counter);
+// var time = 0;
+// var lap = 1;
+// function reset() {
 
-    if (counter === targetNumber) {
-      alert("You win!");
-      $("#wins").html(wins++);
-      targetNumber=null;
-      targetNumber=Math.floor(Math.random()*(120-19)) + 19;
-      $("#number-to-guess").text(targetNumber);
-      counter=null;
-      counter=0;
-    }
+//   time = 0;
+//   lap = 1;
 
-    else if (counter >= targetNumber) {
-      alert("You lose!!");
-      $("#losses").html(losses++);
-      targetNumber=null;
-      targetNumber=Math.floor(Math.random()*(120-19)) + 19;
-      $("#number-to-guess").text(targetNumber);
-      counter=null;
-      counter=0;
-    }
+//   $("#display").html("00:00");
+//   $("#laps").html("");
 
-  });
+// }
+
+// function start() {
+//   intervalId = setInterval(count, 1000);
+// }
+
+// function stop() {
+
+//   console.log("stopping");
+//   clearInterval(intervalId);
+
+// }
+
+// function recordLap() {
+
+//   var converted = timeConverter(time);
+//   $("#laps").append("<p>Lap " + lap + " : " + converted + "</p>");
+//   lap++;
+
+// }
+
+// function count() {
+
+//   time++;
+//   var converted = timeConverter(time);
+//   $("#display").html(converted);
+
+// }
+
+// function timeConverter(t) {
+
+//   var minutes = Math.floor(t / 60);
+//   var seconds = t - (minutes * 60);
+
+//   if (seconds < 10) {
+//     seconds = "0" + seconds;
+//   }
+
+//   if (minutes === 0) {
+//     minutes = "00";
+//   }
+//   else if (minutes < 10) {
+//     minutes = "0" + minutes;
+//   }
+
+//   return minutes + ":" + seconds;
+// }

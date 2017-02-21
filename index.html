@@ -1,21 +1,44 @@
+<!-- Students: Our work lies in the js file. -->
+
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Crystals Collector Game</title>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
-<body>
 
-  <h1>Trivia Game: <span id="number-to-guess"></span></h1>
+<html lang="en-us">
 
-   <!-- Note that this div is now empty. We will fill it dynamically -->
-  <div id="crystals">
-  </div>
-  <h3>Wins:<span id="wins"></span></h3>
-  <h3>Losses:<span id="losses"></span></h3>
-<script src="assets/javascript/app.js"></script>
-</body>
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Trivia Game</title>
+
+    <!-- Our CSS style sheet -->
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+
+    <div id="wrapper">
+
+      <div id="display">00:00</div>
+
+      <!-- Div containing our stopwatch controls -->
+      <div id="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+        <button id="lap">Lap</button>
+      </div>
+
+      <div id="laps"></div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+
+    <!-- Script -->
+    <script type="text/javascript" src="stopwatchSolution.js"></script>
+
+  </body>
+
 </html>
+
