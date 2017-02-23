@@ -1,6 +1,15 @@
 /* Students: Our work lies in the js file. */
 
-body { /* Visual */ background: black;}
+body { /* Visual */ background: black; color: white;}
+
+h1 {
+  text-align: center;
+}
+
+h5 {
+  /*text-align: center;*/
+  margin-left: 75px;
+}
 
 #display {
 
@@ -21,6 +30,8 @@ body { /* Visual */ background: black;}
 
   /* Box-model */
   width: 500px;
+
+
 
 }
 

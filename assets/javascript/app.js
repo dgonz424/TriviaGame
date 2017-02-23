@@ -1,3 +1,4 @@
+//edited code from stopwatch
 // STOPWATCH ACTIVITY (SOLUTION)
 // =============================
 
@@ -82,14 +83,76 @@ var countdown = {
   }
   //   stop: function() {
 
-  //     if (seconds===0) {
+  //     if (minutes===0&&seconds===0) 
   //       clearInterval(intervalId);
-  //     }   
+         
   // },
 
 };
 
+var questions = new Array();
+questions[0] = 'Which two NFL players are the only ones with 5 Super Bowl rings?',
+questions[1] = 'Which NBA player has the most NBA Finals rings?',
+questions[2] = 'Which current MLB team has the longest World Series drought?';
 
+var choices = new Array();
+choices[0] = ['Tom Brady and Joe Montana', 'Joe Montana and Terry Bradshaw', 'Tom Brady and Terry Bradshaw', 'Tom Brady and Charles Haley'],
+choices[1] = ['Michael Jordan', 'Kobe Bryant', 'Bill Russell', 'Tim Duncan'],
+choices[2] = ['Miami Marlins', 'Cleveland Indians', 'Chicago Cubs', 'Seattle Mariners'];
+
+var answers = new Array();
+answers[0] = ['Tom Brady and Charles Haley'],
+answers[1] = ['Tim Duncan'],
+answers[2] = ['Cleveland Indians'];
+
+var score = 0;
+i= 0;
+
+var listQuestion = function(){  
+    if(i<questions.length){
+        $("#myDiv1").html('<p>'+questions[i]+'</p>');
+        var choicesOutput=[];//new Array()
+        for (var k=0; k<choices[i].length; k++){
+            choicesOutput.push(
+                '<p><input type = "radio" name ='
+                +' "questionchoice">'+choices[i][k]+'</p>');
+        }
+        $("#myDiv2").html(choicesOutput.join(""));
+        $("#myDiv3").html('<p><button onClick = "getRadioValue()">Check</button></p> <br>') 
+            ;
+    }
+};
+var getRadioValue = function(){
+    var value = '';
+    for (var h = 0; 
+        h < document.getElementsByName('questionchoice').length; h++){
+        if (document.getElementsByName('questionchoice')[h]
+            .checked==true){
+            value = document.getElementsByName('questionchoice')[h].value;
+            score++;
+        }
+    }
+    if (value== answers[i]){
+        document.getElementById("myDiv4").innerHTML =
+            "That is correct. </br><button input type = "
+            +"'submit' onClick = 'loadContent()'> Next Question</button>";
+    }
+    else {
+        document.getElementById("myDiv4").innerHTML ="That is incorrect. "
+           +"</br><button input type = 'submit' onClick = 'loadContent()'> N"
+           +"ext Question</button>"; 
+    }
+    i++;
+};
+
+function loadContent(){
+    $("#myDiv4").html("");
+    listQuestion();
+}
+
+$("#display").append(listQuestion)
+
+// $("#display").append(score)
 
 
 // Solution if you choose not to put it in an object
