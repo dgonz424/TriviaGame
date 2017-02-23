@@ -152,6 +152,8 @@ function loadContent(){
 
 $("#display").append(listQuestion)
 
+//pls work
+
 // $("#display").append(score)
 
 
