@@ -133,14 +133,14 @@ var getRadioValue = function(){
         }
     }
     if (value== answers[i]){
-        $("#myDiv4").innerHTML =
-            "That is correct. </br><button input type = "
-            +"'submit' onClick = 'loadContent()'> Next Question</button>";
+        $("#myDiv4").html("That is correct. </br><button input type = "
+            +"'submit' onClick = 'loadContent()'> Next Question</button>")
+            ;
     }
     else {
-        $("#myDiv4").innerHTML ="That is incorrect. "
+        $("#myDiv4").html("That is incorrect. "
            +"</br><button input type = 'submit' onClick = 'loadContent()'> N"
-           +"ext Question</button>"; 
+           +"ext Question</button>"); 
     }
     i++;
 };
